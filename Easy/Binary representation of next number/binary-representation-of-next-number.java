@@ -21,18 +21,34 @@ class GfG {
 
 class Solution {
     String binaryNextNumber(String s) {
-        s = s.replaceFirst("^0+(?!$)", "");
         int n = s.length();
-        StringBuilder result = new StringBuilder(s);
-        for (int i = n - 1; i >= 0; i--) {
-            if (s.charAt(i) == '0') {
-                result.setCharAt(i, '1');
-                return result.toString();
-            } else {
-                result.setCharAt(i, '0');
+        char arr[] = s.toCharArray();;
+        int i = 0;
+        for(i = n-1 ; i>=0 ; i--){
+            if(arr[i] == '1'){
+                arr[i] = '0';
+            }
+            else{
+                arr[i] = '1';
+                break;
             }
         }
-       
-        return "1" + result.toString();
+        StringBuilder str = new StringBuilder();
+        if(i < 0){
+            str.append("1");
+            for(i = 0 ; i<n ; i++){
+                str.append(arr[i]);
+            }
+        }
+        else{
+            i = 0;
+            while(i<n && arr[i] == '0'){
+                i++;
+            }
+            for(; i<n ; i++){
+                str.append(arr[i]);
+            }
+        }
+        return str.toString();
     }
 }
