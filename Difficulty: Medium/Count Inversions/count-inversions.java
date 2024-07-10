@@ -58,7 +58,7 @@ class Solution {
                 arr[k++] = lSub[i++];
             }else{
                 arr[k++] = rSub[j++];
-                swap += (mid+1) - (l+i);
+                swap += lSub.length - i;
             }
         }
         while(i<lSub.length){
