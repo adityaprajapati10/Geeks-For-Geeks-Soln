@@ -119,45 +119,34 @@ class GfG {
 
 class Solution
 {
-   public class Pair {
-        Node node;
-        int hd;
-        Pair(Node node, int hd) {
-            this.node = node;
-            this.hd = hd;
-        }
-    }
+    //Function to return a list containing the bottom view of the given tree.
     public ArrayList <Integer> bottomView(Node root)
     {
         // Code here
-        //jaise top view mein kia tha
-        //level order kro
-        Node ptr = root;
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(ptr, 0));
-        while(!q.isEmpty()){
-            Pair p = q.poll();
-            Node nd = p.node;
-            int h = p.hd;
-
-            map.put(h, nd.data);
-
-            if(nd.left != null){
-                q.add(new Pair(nd.left, h-1));
-            }
-            if(nd.right != null){
-                q.add(new Pair(nd.right, h+1));
-            }
-
+        ArrayList <Integer> arr = new ArrayList<>();
+        if(root == null){
+            return arr;
         }
-        ArrayList<Integer> ans = new ArrayList<>();
-        for(Map.Entry<Integer, Integer> hm : map.entrySet()){
-            int a = hm.getValue();
-            ans.add(a);
+        Map<Integer, Integer> map = new TreeMap<>();
+        Queue<Node> que = new LinkedList<>();
+        root.hd = 0;
+        que.add(root);
+        while(!que.isEmpty()){
+            Node node = que.poll();
+            int hd = node.hd;
+            map.put(hd, node.data);
+            if(node.left != null){
+                node.left.hd = hd-1;
+                que.add(node.left);
+            }
+            if(node.right != null){
+                node.right.hd = hd+1;
+                que.add(node.right);
+            }
         }
-
-        return ans;
-        
+        for(int i : map.keySet()){
+            arr.add(map.get(i));
+        }
+        return arr;
     }
 }
