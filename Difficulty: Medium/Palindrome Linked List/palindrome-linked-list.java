@@ -94,9 +94,9 @@ class Solution
             fast = fast.next.next;
         }
 
-        if (fast != null) {
-            slow = slow.next;
-        }
+        // if (fast != null) {
+        //     slow = slow.next;
+        // }
 
         Node mid = slow;
 
